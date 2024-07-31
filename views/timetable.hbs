@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <title>Home</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #fafafa;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+  {{> main }}
+
+  <div class="container">
+    <h1>School Timetable</h1>
+    <form action="/edit" method="POST">
+      <table>
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>1st Hour</th>
+            <th>2nd Hour</th>
+            <th>3rd Hour</th>
+            <th>4th Hour</th>
+            <th>5th Hour</th>
+            <th>6th Hour</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each timetable}}
+            <tr>
+              <td>{{@key}}</td>
+              {{#each this}}
+                <td>
+                  <select name="timetable[{{@../key}}][{{@index}}]">
+                    <option value="Languages" {{#if (eq this "Languages")}}selected{{/if}}>Languages</option>
+                    <option value="Sciences" {{#if (eq this "Sciences")}}selected{{/if}}>Sciences</option>
+                    <option value="Arts" {{#if (eq this "Arts")}}selected{{/if}}>Arts</option>
+                    <option value="Sports" {{#if (eq this "Sports")}}selected{{/if}}>Sports</option>
+                  </select>
+                </td>
+              {{/each}}
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <button type="submit">Save Timetable</button>
+    </form>
+    <form action="/generate" method="POST">
+      <button type="submit">Generate Timetable</button>
+    </form>
+  </div>
+
+  <script>
+    
+  </script>
+</body>
+</html>
